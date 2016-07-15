@@ -55,7 +55,7 @@ describe(Client) do
   end
 
   describe("#delete") do
-    it("should delete the stylist from the database") do
+    it("should delete the client from the database") do
       client1 = Client.new({name: 'Mary Shelley', next_appointment: "2016-09-09 04:05:06", stylist_id: 1})
       client1.save()
       client2 = Client.new({name: 'Mary Shelley', next_appointment: "2016-09-09 04:05:06", stylist_id: 1})
@@ -64,7 +64,7 @@ describe(Client) do
       expect(Client.all()).to(eq([client2]))
     end
   end
-  
+
   describe(".find") do
     it("should find a client by its id") do
       client1 = Client.new({name: 'Mary Shelley', next_appointment: "2016-09-09 04:05:06", stylist_id: 1})
