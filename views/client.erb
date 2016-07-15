@@ -1,0 +1,27 @@
+<div id="index-banner" class="parallax-container">
+  <div class="section no-pad-bot">
+    <div class="container">
+      <br><br>
+      <h1 class="header center teal-text text-lighten-2">Hairs not Scares</h1>
+      <div class="row center">
+        <a href="/stylists" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">View Stylists</a>
+        <a href="/clients" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">View Clients</a>
+      </div>
+      <div class="row center">
+        <a href="/clients/new" id="download-button" class="btn-large waves-effect waves-light white lighten-1 teal-text">Add Clients</a>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+  <div class="parallax"><img src="<%= url('img/pugwrap.jpg') %>" alt="Unsplashed background img 1"></div>
+</div>
+
+<div class="container">
+  <div class="row center">
+    <h1>Name: <%= @client.name() %></h1>
+    <h3>Next Appointment: <%= @client.next_appointment() %></h3>
+
+
+  </div>
+</div>

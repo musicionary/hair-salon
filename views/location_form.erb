@@ -2,27 +2,43 @@
   <div class="section no-pad-bot">
     <div class="container">
       <br><br>
-      <h1 class="header center teal-text text-lighten-2">Add A City</h1>
+      <h1 class="header center teal-text text-lighten-2">Add A Location</h1>
       <div class="row center">
-        <a href="/cities" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">View Cities</a>
+        <a href="/locations" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">View Locations</a>
       </div>
       <br><br>
 
     </div>
   </div>
-  <div class="parallax"><img src="<%= url('img/background1.jpg') %>" alt="Unsplashed background img 1"></div>
+  <div class="parallax"><img src="<%= url('img/pugwrap.jpg') %>" alt="Unsplashed background img 1"></div>
 </div>
 
 <div class="row container">
-  <form class="col s12" action="/cities" method="post">
+  <form class="col s12" action="/locations" method="post">
     <div class="row">
-      <div class="input-field col s6">
-        <input type="text" placeholder="City Name" name="name" id="name" class="validate">
-        <label for="name"></label>
+      <div class="col s6">
+        <label for="store_name">Store Name</label>
+        <input type="text" placeholder="Store Name" name="store_name" id="store_name" class="validate">
       </div>
-      <div class="input-field col s6">
-        <label for="state"></label>
-        <input type="text" placeholder="State" name="state" id="state" class="validate">
+      <div class="col s6">
+        <label for="street">Street</label>
+        <input type="text" placeholder="Street" name="street" id="street" class="validate">
+      </div>
+      <div class="col s6">
+        <label for="city">City</label>
+        <input type="text" placeholder="City" name="city" id="city" class="validate">
+      </div>
+      <div class="col s6">
+        <label for="zip">Zip</label>
+        <input type="text" placeholder="Zip" name="zip" id="zip" class="validate">
+      </div>
+      <div class="col s6">
+        <label for="opening_time">Opening Time</label>
+        <input type="time" placeholder="Opening Time" name="opening_time" id="opening_time" class="validate">
+      </div>
+      <div class="col s6">
+        <label for="closing_time">Closing Time</label>
+        <input type="time" placeholder="Closing Time" name="closing_time" id="closing_time" class="validate">
       </div>
     </div>
     <button class="btn waves-effect waves-light" type="submit">Submit
