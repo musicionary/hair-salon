@@ -98,4 +98,17 @@ class Location
     end
     found_location
   end
+
+  define_method(:stylists) do
+    location_stylists = []
+    stylists = DB.exec("SELECT * FROM stylists WHERE stylist_id = #{self.id()} ORDER BY name ASC;")
+    stylists.each() do |stylist|
+      name = stylist.fetch("name")
+      station = stylist.fetch("station")
+      location_id = stylist.fetch("location_id").to_i()
+      id = stylist.fetch("id").to_i()
+      specialty_stylists.push(Stylist.new({name: name, station: station, location_id: location_id, id: id}))
+    end
+    location_stylists
+  end
 end

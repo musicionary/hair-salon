@@ -1,14 +1,17 @@
 class Stylist
-  attr_reader(:name, :station, :id)
+  attr_reader(:name, :station, :location_id, :id)
 
   define_method(:initialize) do |attributes|
     @name = attributes.fetch(:name)
     @station = attributes.fetch(:station)
+    @location_id = attributes.fetch(:location_id)
     @id = attributes[:id]
   end
 
   define_method(:==) do |another_stylist|
-    self.name() == another_stylist.name() && self.station() == another_stylist.station()
+    self.name() == another_stylist.name() &&
+    self.station() == another_stylist.station() &&
+    self.location_id() == another_stylist.location_id()
   end
 
   define_singleton_method(:all) do
@@ -23,8 +26,9 @@ class Stylist
       if station.include? "ß"
         station = station.gsub(/ß/, "'")
       end
+      location_id = stylist.fetch("location_id").to_i()
       id = stylist.fetch("id").to_i()
-      stylists.push(Stylist.new({name: name, station: station, id: id}))
+      stylists.push(Stylist.new({name: name, station: station, location_id: location_id, id: id}))
     end
     stylists
   end
@@ -36,7 +40,7 @@ class Stylist
     if @station.include? "'"
       @station = @station.gsub(/'/, "ß")
     end
-    result = DB.exec("INSERT INTO stylists (name, station) VALUES ('#{@name}', '#{@station}') RETURNING id;")
+    result = DB.exec("INSERT INTO stylists (name, station, location_id) VALUES ('#{@name}', '#{@station}', #{@location_id}) RETURNING id;")
     @id = result.first().fetch('id').to_i()
   end
 
@@ -49,9 +53,11 @@ class Stylist
     if @station.include? "'"
       @station = @station.gsub(/'/, "ß")
     end
+    @location_id = attributes.fetch(:location_id, @location_id)
     @id = self.id()
     DB.exec("UPDATE stylists SET name = '#{@name}' WHERE id = #{@id};")
     DB.exec("UPDATE stylists SET station = '#{@station}' WHERE id = #{@id};")
+    DB.exec("UPDATE stylists SET location_id = '#{@location_id}' WHERE id = #{@id};")
   end
 
   define_method(:delete) do
@@ -69,16 +75,16 @@ class Stylist
     found_stylist
   end
 
-  # define_method(:clients) do
-  #   stylist_clients = []
-  #   clients = DB.exec("SELECT * FROM clients WHERE stylist_id = #{self.id()} ORDER BY name ASC;")
-  #   clients.each() do |client|
-  #     name = client.fetch("name")
-  #     next_appointment = client.fetch("next_appointment")
-  #     stylist_id = client.fetch("stylist_id").to_i()
-  #     id = client.fetch("id").to_i()
-  #     specialty_clients.push(Client.new({name: name, next_appointment: next_appointment, stylist_id: stylist_id, id: id}))
-  #   end
-  #   stylist_clients
-  # end
+  define_method(:clients) do
+    stylist_clients = []
+    clients = DB.exec("SELECT * FROM clients WHERE stylist_id = #{self.id()} ORDER BY name ASC;")
+    clients.each() do |client|
+      name = client.fetch("name")
+      next_appointment = client.fetch("next_appointment")
+      stylist_id = client.fetch("stylist_id").to_i()
+      id = client.fetch("id").to_i()
+      stylist_clients.push(Client.new({name: name, next_appointment: next_appointment, stylist_id: stylist_id, id: id}))
+    end
+    stylist_clients
+  end
 end

@@ -16,11 +16,34 @@ describe(Location) do
   end
 
   describe("#city") do
-    it("should return the cityof the location") do
+    it("should return the city of the location") do
       test_location = Location.new({store_name: "Westside", street: "201 Westbrook Road", city: "Nantucket", zip: "40223", opening_time: "09:00:00", closing_time: "03:00:00"})
       expect(test_location.city()).to(eq("Nantucket"))
     end
   end
+
+  describe("#zip") do
+    it("should return the zip of the location") do
+      test_location = Location.new({store_name: "Westside", street: "201 Westbrook Road", city: "Nantucket", zip: "40223", opening_time: "09:00:00", closing_time: "03:00:00"})
+      expect(test_location.zip()).to(eq("40223"))
+    end
+  end
+
+  describe("#opening_time") do
+    it("should return the opening time of the location") do
+      test_location = Location.new({store_name: "Westside", street: "201 Westbrook Road", city: "Nantucket", zip: "40223", opening_time: "09:00:00", closing_time: "03:00:00"})
+      expect(test_location.opening_time()).to(eq("09:00:00"))
+    end
+  end
+
+  describe("#closing_time") do
+    it("should return the closing time of the location") do
+      test_location = Location.new({store_name: "Westside", street: "201 Westbrook Road", city: "Nantucket", zip: "40223", opening_time: "09:00:00", closing_time: "03:00:00"})
+      expect(test_location.closing_time()).to(eq("03:00:00"))
+    end
+  end
+
+
 
   describe("#==") do
     it("should be the same location if the attributes are the same") do
