@@ -1,0 +1,33 @@
+<div id="index-banner" class="parallax-container">
+  <div class="section no-pad-bot">
+    <div class="container">
+      <br><br>
+      <h1 class="header center teal-text text-lighten-2">Hairs not Scares</h1>
+      <div class="row center">
+        <a href="/locations" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">View Locations</a>
+        <a href="/clients" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">View Clients</a>
+      </div>
+      <div class="row center">
+        <a href="/stylists/new" id="download-button" class="btn-large waves-effect waves-light white lighten-1 teal-text">Add Stylists</a>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+  <div class="parallax"><img src="<%= url('img/pugwrap.jpg') %>" alt="Unsplashed background img 1"></div>
+</div>
+
+<div class="container">
+  <div class="row center">
+    <% if @stylists.any?() %>
+      <ul class="collection with-header">
+        <li class="collection-header">Stylists</li>
+        <% @stylists.each() do |stylist| %>
+          <li class="collection-item"><a href="/stylists/<%= stylist.id() %>"><%= stylist.name() %></a></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <h2>There are no stylists yet!</h2>
+    <% end %>
+  </div>
+</div>
