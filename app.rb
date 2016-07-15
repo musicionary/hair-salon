@@ -55,32 +55,32 @@ patch("/locations/:id") do
   if params.fetch('store_name') == ""
     store_name = @location.store_name()
   else
-    store_name = params.fetch('store_name').to_i()
+    store_name = params.fetch('store_name')
   end
   if params.fetch('street') == ""
     street = @location.street()
   else
-    street = params.fetch('street').to_i()
+    street = params.fetch('street')
   end
   if params.fetch('city') == ""
     city = @location.city()
   else
-    city = params.fetch('city').to_i()
+    city = params.fetch('city')
   end
   if params.fetch('zip') == ""
     zip = @location.zip()
   else
-    zip = params.fetch('zip').to_i()
+    zip = params.fetch('zip')
   end
   if params.fetch('opening_time') == ""
     opening_time = @location.opening_time()
   else
-    opening_time = params.fetch('opening_time').to_i()
+    opening_time = params.fetch('opening_time')
   end
   if params.fetch('closing_time') == ""
     closing_time = @location.closing_time()
   else
-    closing_time = params.fetch('closing_time').to_i()
+    closing_time = params.fetch('closing_time')
   end
   # city_ids = params.fetch("city_ids", [])
   @location.update({store_name: store_name, street: street, city: city, zip: zip, opening_time: opening_time, closing_time: closing_time})
@@ -122,6 +122,39 @@ get('/stylists/:id') do
   # @cities = City.all()
   erb(:stylist)
 end
+
+get("/stylist/:id/edit") do
+  @stylist = Stylist.find(params.fetch("id").to_i())
+  # @cities = City.all()
+  erb(:stylist_edit)
+end
+
+patch("/stylist/:id") do
+  # @cities = City.all()
+  stylist_id = params.fetch("id").to_i()
+  @stylist = Stylist.find(stylist_id)
+  if params.fetch('name') == ""
+    name = @stylist.name()
+  else
+    name = params.fetch('name')
+  end
+  if params.fetch('station') == ""
+    station = @stylist.station()
+  else
+    station = params.fetch('station').to_i()
+  end
+  # city_ids = params.fetch("city_ids", [])
+  @stylist.update({name: name, station: station})
+  erb(:stylist)
+end
+
+delete("/stylists/:id") do
+  @stylist = Stylist.find(params.fetch("id").to_i())
+  @stylist.delete()
+  @stylists = Stylist.all()
+  erb(:stylists)
+end
+
 
 
 
