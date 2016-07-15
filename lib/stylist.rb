@@ -45,18 +45,18 @@ class Stylist
     if @name.include? "'"
       @name = @name.gsub(/'/, "ß")
     end
-    @station = attributes.fetch(:name, @station)
+    @station = attributes.fetch(:station, @station)
     if @station.include? "'"
       @station = @station.gsub(/'/, "ß")
     end
     @id = self.id()
-    DB.exec("UPDATE stylists SET name = '#{@name}' WHERE id = '#{@id}';")
-    DB.exec("UPDATE stylists SET station = '#{@station}' WHERE id = '#{@id}';")
+    DB.exec("UPDATE stylists SET name = '#{@name}' WHERE id = #{@id};")
+    DB.exec("UPDATE stylists SET station = '#{@station}' WHERE id = #{@id};")
   end
 
   define_method(:delete) do
     @id = self.id()
-    DB.exec("DELETE FROM stylists WHERE id = '#{@id}'")
+    DB.exec("DELETE FROM stylists WHERE id = #{@id}")
   end
 
   define_singleton_method(:find) do |id|
@@ -69,16 +69,16 @@ class Stylist
     found_stylist
   end
 
-  define_method(:clients) do
-    stylist_clients = []
-    clients = DB.exec("SELECT * FROM clients WHERE stylist_id = #{self.id()} ORDER BY name ASC;")
-    clients.each() do |client|
-      name = client.fetch("name")
-      next_appointment = client.fetch("next_appointment")
-      stylist_id = client.fetch("stylist_id").to_i()
-      id = client.fetch("id").to_i()
-      specialty_clients.push(Client.new({name: name, next_appointment: next_appointment, stylist_id: stylist_id, id: id}))
-    end
-    stylist_clients
-  end
+  # define_method(:clients) do
+  #   stylist_clients = []
+  #   clients = DB.exec("SELECT * FROM clients WHERE stylist_id = #{self.id()} ORDER BY name ASC;")
+  #   clients.each() do |client|
+  #     name = client.fetch("name")
+  #     next_appointment = client.fetch("next_appointment")
+  #     stylist_id = client.fetch("stylist_id").to_i()
+  #     id = client.fetch("id").to_i()
+  #     specialty_clients.push(Client.new({name: name, next_appointment: next_appointment, stylist_id: stylist_id, id: id}))
+  #   end
+  #   stylist_clients
+  # end
 end

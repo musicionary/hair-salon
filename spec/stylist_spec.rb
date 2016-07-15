@@ -66,15 +66,15 @@ describe(Stylist) do
     end
   end
 
-  describe("#clients") do
-    it("should return the list of cliests for a particular stylist") do
-      stylist1 = Stylist.new({name: 'Mary Shelley', station: "1"})
-      stylist1.save()
-      client1 = Client.new({name: "Joe Watts", next_appointment: "2016-09-09", stylist_id: stylist1.id(), id: nil})
-      client1.save()
-      client2 = Client.new({name: "Alison Hill", next_appointment: "2016-09-09", stylist_id: stylist1.id(), id: nil})
-      client2.save()
-      expect(stylist1.clients()).to(eq([client1, client2]))
-    end
-  end
+  # describe("#clients") do
+  #   it("should return the list of cliests for a particular stylist") do
+  #     stylist1 = Stylist.new({name: 'Mary Shelley', station: "1"})
+  #     stylist1.save()
+  #     client1 = Client.new({name: "Joe Watts", next_appointment: "2016-09-09", stylist_id: stylist1.id(), id: nil})
+  #     client1.save()
+  #     client2 = Client.new({name: "Alison Hill", next_appointment: "2016-09-09", stylist_id: stylist1.id(), id: nil})
+  #     client2.save()
+  #     expect(stylist1.clients()).to(eq([client1, client2]))
+  #   end
+  # end
 end
