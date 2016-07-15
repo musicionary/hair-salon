@@ -123,13 +123,13 @@ get('/stylists/:id') do
   erb(:stylist)
 end
 
-get("/stylist/:id/edit") do
+get("/stylists/:id/edit") do
   @stylist = Stylist.find(params.fetch("id").to_i())
   # @cities = City.all()
   erb(:stylist_edit)
 end
 
-patch("/stylist/:id") do
+patch("/stylists/:id") do
   # @cities = City.all()
   stylist_id = params.fetch("id").to_i()
   @stylist = Stylist.find(stylist_id)
@@ -187,13 +187,13 @@ get('/clients/:id') do
   erb(:client)
 end
 
-get("/client/:id/edit") do
+get("/clients/:id/edit") do
   @client = Client.find(params.fetch("id").to_i())
   # @cities = City.all()
   erb(:client_edit)
 end
 
-patch("/client/:id") do
+patch("/clients/:id") do
   # @cities = City.all()
   client_id = params.fetch("id").to_i()
   @client = Client.find(client_id)

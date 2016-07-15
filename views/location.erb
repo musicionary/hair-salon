@@ -4,11 +4,12 @@
       <br><br>
       <h1 class="header center teal-text text-lighten-2">Hairs not Scares</h1>
       <div class="row center">
+        <a href="/locations" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">View Locations</a>
         <a href="/stylists" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">View Stylists</a>
         <a href="/clients" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">View Clients</a>
       </div>
       <div class="row center">
-        <a href="/locations/new" id="download-button" class="btn-large waves-effect waves-light white lighten-1 teal-text">Add Locations</a>
+        <a href="/locations/<%= @location.id() %>/edit" id="download-button" class="btn-large waves-effect waves-light white lighten-1 teal-text">Edit Location</a>
       </div>
       <br><br>
 
@@ -18,15 +19,22 @@
 </div>
 
 <div class="container">
-  <div class="row center">
+  <div class="row">
     <h1>Store: <%= @location.store_name() %></h1>
-    <h3>Street: <%= @location.street() %></h3>
-    <h3>City: <%= @location.city() %></h3>
-    <h3>Zip: <%= @location.zip() %></h3>
-    <h3>Opening Time: <%= @location.opening_time() %></h3>
-    <h3>Closing Time: <%= @location.closing_time() %></h3>
+    <div class="col s6">
+      <h4>Street: <%= @location.street() %></h4>
+      <h4>City: <%= @location.city() %></h4>
+      <h4>Zip: <%= @location.zip() %></h4>
+    </div>
+    <div class="col s6">
+      <h4>Opening Time: <%= @location.opening_time() %></h4>
+      <h4>Closing Time: <%= @location.closing_time() %></h4>
+    </div>
 
-
+    <form class="col s12" action="/locations/<%= @location.id() %>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button class="btn waves-effect waves-light" type="submit">Delete</button>
+    </form>
 
   </div>
 </div>

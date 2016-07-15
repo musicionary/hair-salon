@@ -4,11 +4,12 @@
       <br><br>
       <h1 class="header center teal-text text-lighten-2">Hairs not Scares</h1>
       <div class="row center">
+        <a href="/locations" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">View Locations</a>
         <a href="/stylists" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">View Stylists</a>
         <a href="/clients" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">View Clients</a>
       </div>
       <div class="row center">
-        <a href="/clients/new" id="download-button" class="btn-large waves-effect waves-light white lighten-1 teal-text">Add Clients</a>
+        <a href="/clients/<%= @client.id() %>/edit" id="download-button" class="btn-large waves-effect waves-light white lighten-1 teal-text">Edit Client</a>
       </div>
       <br><br>
 
@@ -22,6 +23,9 @@
     <h1>Name: <%= @client.name() %></h1>
     <h3>Next Appointment: <%= @client.next_appointment() %></h3>
 
-
+    <form class="col s12" action="/clients/<%= @client.id() %>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button class="btn waves-effect waves-light" type="submit">Delete</button>
+    </form>
   </div>
 </div>
