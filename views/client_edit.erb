@@ -1,0 +1,38 @@
+<div id="index-banner" class="parallax-container">
+  <div class="section no-pad-bot">
+    <div class="container">
+      <br><br>
+      <h1 class="header center teal-text text-lighten-2">Edit Client</h1>
+      <div class="row center">
+        <a href="/clients" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">View Clients</a>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+  <div class="parallax"><img src="<%= url('img/pugwrap.jpg') %>" alt="Unsplashed background img 1"></div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <h1 class="center">Name: <%= @client.name() %></h1>
+
+    <form class="col s12" action="/clients/<%= @client.id() %>" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <div class="row">
+        <div class="col s6">
+          <label for="name">Name</label>
+          <input type="text" placeholder="Name" name="name" id="name" class="validate">
+        </div>
+        <div class="col s6">
+          <label for="next_appointment">Next Appointment: (format yyyy/mm/dd hh:mm:ss)</label>
+          <input type="datetime" placeholder="Next Appointment" name="next_appointment" id="next_appointment" class="validate datepicker">
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light" type="submit">Submit
+        <i class="material-icons right">send</i>
+      </button>
+    </form>
+
+  </div>
+</div>
