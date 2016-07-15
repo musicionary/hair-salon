@@ -15,6 +15,7 @@
 
 <div class="row container">
   <form class="col s12" action="/clients" method="post">
+    <input id="stylist_id" type="hidden" name="stylist_id" value="<%= @stylist.id() %>">
     <div class="row">
       <div class="col s6">
         <label for="name">Name</label>

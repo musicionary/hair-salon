@@ -10,6 +10,7 @@
       </div>
       <div class="row center">
         <a href="/stylists/<%= @stylist.id() %>/edit" id="download-button" class="btn-large waves-effect waves-light white lighten-1 teal-text">Edit Stylist</a>
+        <a href="/stylists/<%= @stylist.id() %>/client/new" class="btn-large waves-effect waves-light white lighten-1 teal-text">Add a Client</a>
       </div>
       <br><br>
 
@@ -19,9 +20,16 @@
 </div>
 
 <div class="container">
-  <div class="row center">
+  <div class="row">
     <h1>Name: <%= @stylist.name() %></h1>
-    <h3>Station: <%= @stylist.station() %></h3>
+    <h4>Station: <%= @stylist.station() %></h4>
+
+    <h4>Clients:</h4>
+    <ul>
+      <% @stylist.clients().each() do |client| %>
+      <li><a href="/stylists/<%= @stylist.id() %>/client/<%= client.id() %>"><%= client.name() %></a></li>
+      <% end %>
+    </ul>
 
     <form class="col s12" action="/stylists/<%= @stylist.id() %>" method="post">
       <input type="hidden" name="_method" value="delete">

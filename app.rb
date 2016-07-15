@@ -7,7 +7,7 @@ require('./lib/client')
 require('pg')
 require('pry')
 
-# DB = PG.connect({:dbname => "hair_salon"})
+DB = PG.connect({:dbname => "hair_salon"})
 
 get("/") do
   erb(:index)
@@ -38,18 +38,15 @@ end
 
 get('/locations/:id') do
   @location = Location.find(params.fetch('id').to_i())
-  # @cities = City.all()
   erb(:location)
 end
 
 get("/locations/:id/edit") do
   @location = Location.find(params.fetch("id").to_i())
-  # @cities = City.all()
   erb(:location_edit)
 end
 
 patch("/locations/:id") do
-  # @cities = City.all()
   location_id = params.fetch("id").to_i()
   @location = Location.find(location_id)
   if params.fetch('store_name') == ""
@@ -82,7 +79,6 @@ patch("/locations/:id") do
   else
     closing_time = params.fetch('closing_time')
   end
-  # city_ids = params.fetch("city_ids", [])
   @location.update({store_name: store_name, street: street, city: city, zip: zip, opening_time: opening_time, closing_time: closing_time})
   erb(:location)
 end
@@ -119,18 +115,15 @@ end
 
 get('/stylists/:id') do
   @stylist = Stylist.find(params.fetch('id').to_i())
-  # @cities = City.all()
   erb(:stylist)
 end
 
 get("/stylists/:id/edit") do
   @stylist = Stylist.find(params.fetch("id").to_i())
-  # @cities = City.all()
   erb(:stylist_edit)
 end
 
 patch("/stylists/:id") do
-  # @cities = City.all()
   stylist_id = params.fetch("id").to_i()
   @stylist = Stylist.find(stylist_id)
   if params.fetch('name') == ""
@@ -143,8 +136,7 @@ patch("/stylists/:id") do
   else
     station = params.fetch('station').to_i()
   end
-  # city_ids = params.fetch("city_ids", [])
-  @stylist.update({name: name, station: station})
+  @stylist.update({name: name, station: station, client_ids: client_ids})
   erb(:stylist)
 end
 
@@ -155,46 +147,40 @@ delete("/stylists/:id") do
   erb(:stylists)
 end
 
+get("/stylists/:id/client/new") do
+  @stylist = Stylist.find(params.fetch("id").to_i())
+  erb(:client_form)
+end
 
-
-
-#######################################
-# CLIENTS
-#######################################
 
 get('/clients') do
   @clients = Client.all()
   erb(:clients)
 end
 
-get('/clients/new') do
-  erb(:client_form)
-end
-
 post('/clients') do
   name = params.fetch('name')
   next_appointment = params.fetch('next_appointment')
-
-  client = Client.new({name: name, next_appointment: next_appointment, stylist_id: 1})
-  client.save()
+  stylist_id = params.fetch("stylist_id").to_i()
+  @stylist = Stylist.find(stylist_id)
+  @client = Client.new({name: name, next_appointment: next_appointment, stylist_id: stylist_id})
+  @client.save()
   @clients = Client.all()
   erb(:clients)
 end
 
-get('/clients/:id') do
-  @client = Client.find(params.fetch('id').to_i())
-  # @cities = City.all()
+get("/stylists/:id/client/:id1") do
+  @stylist = Stylist.find(params.fetch("id").to_i())
+  @client = Client.find(params.fetch("id1").to_i())
   erb(:client)
 end
 
 get("/clients/:id/edit") do
   @client = Client.find(params.fetch("id").to_i())
-  # @cities = City.all()
   erb(:client_edit)
 end
 
 patch("/clients/:id") do
-  # @cities = City.all()
   client_id = params.fetch("id").to_i()
   @client = Client.find(client_id)
   if params.fetch('name') == ""
@@ -207,7 +193,6 @@ patch("/clients/:id") do
   else
     next_appointment = params.fetch('next_appointment')
   end
-  # city_ids = params.fetch("city_ids", [])
   @client.update({name: name, next_appointment: next_appointment})
   erb(:client)
 end

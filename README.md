@@ -20,6 +20,12 @@
 Create an application for a hair salon. The stylists at the salon work independently, so each client will only belong to a single stylist (one stylist, many clients).
 
 
+As a salon owner, I want to add clients to a stylist.
+
+
+
+
+
 ## Usage
 
 In your terminal, run 'ruby app.rb' to start the Sinatra local server and point your browser to localhost:4567

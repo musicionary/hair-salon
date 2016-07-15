@@ -44,7 +44,7 @@ class Location
     end
     locations
   end
-  #
+  
   define_method(:save) do
     if @store_name.include? "'"
       @store_name = @store_name.gsub(/'/, "ß")
