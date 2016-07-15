@@ -186,3 +186,35 @@ get('/clients/:id') do
   # @cities = City.all()
   erb(:client)
 end
+
+get("/client/:id/edit") do
+  @client = Client.find(params.fetch("id").to_i())
+  # @cities = City.all()
+  erb(:client_edit)
+end
+
+patch("/client/:id") do
+  # @cities = City.all()
+  client_id = params.fetch("id").to_i()
+  @client = Client.find(client_id)
+  if params.fetch('name') == ""
+    name = @client.name()
+  else
+    name = params.fetch('name')
+  end
+  if params.fetch('next_appointment') == ""
+    next_appointment = @client.next_appointment()
+  else
+    next_appointment = params.fetch('next_appointment')
+  end
+  # city_ids = params.fetch("city_ids", [])
+  @client.update({name: name, next_appointment: next_appointment})
+  erb(:client)
+end
+
+delete("/clients/:id") do
+  @client = Client.find(params.fetch("id").to_i())
+  @client.delete()
+  @clients = Client.all()
+  erb(:clients)
+end
