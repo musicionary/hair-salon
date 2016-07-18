@@ -47,9 +47,9 @@ class Stylist
       @name = @name.gsub(/'/, "ß")
     end
     @station = attributes.fetch(:station, @station)
-    if @station.include? "'"
-      @station = @station.gsub(/'/, "ß")
-    end
+    # if @station.include? "'"
+    #   @station = @station.gsub(/'/, "ß")
+    # end
     @id = self.id()
     DB.exec("UPDATE stylists SET name = '#{@name}' WHERE id = #{@id};")
     DB.exec("UPDATE stylists SET station = '#{@station}' WHERE id = #{@id};")

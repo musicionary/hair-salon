@@ -55,7 +55,7 @@ patch("/stylists/:id") do
   if params.fetch('station') == ""
     station = @stylist.station()
   else
-    station = params.fetch('station').to_i()
+    station = params.fetch('station')
   end
   @stylist.update({name: name, station: station})
   erb(:stylist)
@@ -119,7 +119,6 @@ patch("/clients/:id") do
 end
 
 delete("/clients/:id") do
-  # @stylist = Stylist.find(params.fetch("id").to_i())
   @client = Client.find(params.fetch("id").to_i())
   @client.delete()
   @clients = Client.all()

@@ -24,6 +24,33 @@ describe('add a stylist', {:type => :feature}) do
   end
 end
 
+describe('edit a stylist', {:type => :feature}) do
+  it('allows a user to add a stylists') do
+    visit('/stylists')
+    click_on("Add Stylists")
+    fill_in("name", :with => "John")
+    fill_in("station", :with => 3)
+    click_button("Submit")
+    expect(page).to have_content("Hairs not Scares")
+    click_on("John")
+    click_on("Edit Stylist")
+    expect(page).to have_content()
+  end
+end
+
+describe('edit a stylist', {:type => :feature}) do
+  it('allows a user to add a stylists') do
+    visit('/stylists')
+    click_on("Add Stylists")
+    fill_in("name", :with => "John")
+    fill_in("station", :with => 3)
+    click_button("Submit")
+    expect(page).to have_content("Hairs not Scares")
+    click_on("John")
+    click_on("Edit Stylist")
+  end
+end
+
 describe('adding a new client', {:type => :feature}) do
   it('allows a user to add a client') do
     visit('/')
