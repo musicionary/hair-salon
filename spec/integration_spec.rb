@@ -4,22 +4,6 @@ require('./app')
 Capybara.app = Sinatra::Application
 set(:show_exceptions, false)
 
-describe('adding a new location', {:type => :feature}) do
-  it('allows a user to add a location') do
-    visit('/')
-    click_on("View Locations")
-    expect(page).to have_content("Locations")
-    click_on("Add Locations")
-    fill_in("store_name", :with => "Westbrook")
-    fill_in("street", :with => "Main")
-    fill_in("city", :with => "Big Apple")
-    fill_in("zip", :with => "40223")
-    fill_in("opening_time", :with => "12:00:00")
-    fill_in("closing_time", :with => "12:00:00")
-    click_button("Submit")
-    expect(page).to have_content("Hairs not Scares")
-  end
-end
 
 describe('adding a new stylist', {:type => :feature}) do
   it('allows a user to add a stylist') do

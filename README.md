@@ -13,7 +13,6 @@
   * CREATE DATABASE hair_salon;
   * CREATE DATABASE hair_salon_test WITH TEMPLATE hair_salon;
 
-  * CREATE TABLE locations (id serial PRIMARY KEY, store_name varchar, street varchar, city varchar, zip varchar, opening_time time, closing_time time);
   * CREATE TABLE stylists (id serial PRIMARY KEY, name varchar, station varchar);
   * CREATE TABLE clients (id serial PRIMARY KEY, name varchar, next_appointment timestamp, stylist_id int);
 
