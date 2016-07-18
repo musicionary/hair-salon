@@ -5,11 +5,17 @@ Capybara.app = Sinatra::Application
 set(:show_exceptions, false)
 
 
-describe('adding a new stylist', {:type => :feature}) do
-  it('allows a user to add a stylist') do
+describe('view stylists page', {:type => :feature}) do
+  it('allows a user to view all stylists') do
     visit('/')
     click_on("View Stylists")
     expect(page).to have_content("Stylists")
+  end
+end
+
+describe('add a stylist', {:type => :feature}) do
+  it('allows a user to add a stylists') do
+    visit('/stylists')
     click_on("Add Stylists")
     fill_in("name", :with => "John")
     fill_in("station", :with => 3)
@@ -32,7 +38,7 @@ describe('adding a new client', {:type => :feature}) do
     expect(page).to have_content("John")
     click_on("Add a Client")
     fill_in("name", :with => "James")
-    fill_in("next_appointment", :with => "9999-99-99 00:00:00")
+    fill_in("next_appointment", :with => "9999-99-99")
     click_button("Submit")
   end
 end

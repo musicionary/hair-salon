@@ -119,6 +119,7 @@ patch("/clients/:id") do
 end
 
 delete("/clients/:id") do
+  # @stylist = Stylist.find(params.fetch("id").to_i())
   @client = Client.find(params.fetch("id").to_i())
   @client.delete()
   @clients = Client.all()
